@@ -1,3 +1,9 @@
 body {
     background-color: lightblue;
 }
+
+.start,
+.reset {
+    background-color: blue;
+   color: white;
+}

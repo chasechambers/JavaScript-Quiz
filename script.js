@@ -10,3 +10,13 @@
 
 
 // QUESTIONS AND ANSWERS
+
+var questions = document.querySelector('.question');
+
+document.querySelector('.start').addEventListener('click', function(){
+alert('hello');
+});
+
+document.querySelector('.reset').addEventListener('click', function(){
+    alert('goodbye');
+    });

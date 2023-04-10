@@ -2,6 +2,7 @@ const questionArea = document.getElementById('question');
 const startButton = document.querySelector('.start');
 const resetButton = document.querySelector('.reset');
 const answerA = document.getElementById('answerA');
+const answerAText = document.getElementById('answerAText');
 const answerB = document.getElementById('answerB');
 const answerC = document.getElementById('answerC');
 const answerD = document.getElementById('answerD');
@@ -16,7 +17,7 @@ const questions = [
     {
         question:'Q1', answerKey:
         [
-            {answer: 'a', correct: true}, {answer: 'b', correct: false}, {answer: 'c', correct: false}, {answer: 'd', correct: false}
+            {key: 'a', answer: 'text of answer', correct: true}, {answer: 'b', correct: false}, {answer: 'c', correct: false}, {answer: 'd', correct: false}
         ]
     },
     {
@@ -48,10 +49,11 @@ timer.textContent = remainingTime;
 const showNextQuestion = (questionIndex) => {
     const question = questions[questionIndex];
     questionArea.textContent=question.question;
-    answerA.textContent=question.answerKey[0].answer;
-    answerB.textContent=question.answerKey[1].answer;
-    answerC.textContent=question.answerKey[2].answer;
-    answerD.textContent=question.answerKey[3].answer;
+    answerA.textContent = question.answerKey[0].key;
+    answerB.textContent = question.answerKey[1].key;
+    answerC.textContent = question.answerKey[2].key;
+    answerD.textContent = question.answerKey[3].key;
+    answerAText.textContent = question.answerKey[0].answer;
 };
 
 

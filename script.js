@@ -1,76 +1,102 @@
 const questionArea = document.getElementById('question');
 const startButton = document.querySelector('.start');
 const resetButton = document.querySelector('.reset');
-const answers = document.querySelector('.answer')
-const timer = document.querySelector('.timer')
-const btn = document.querySelector('.btn')
-var startingTime = 10;
+const answerA = document.getElementById('answerA');
+const answerB = document.getElementById('answerB');
+const answerC = document.getElementById('answerC');
+const answerD = document.getElementById('answerD');
+const timer = document.querySelector('.timer');
+const btn = document.querySelector('.btn');
+const fullTime = 60;
+let remainingTime = fullTime;
+let score = 0;
+const penaltyTime = 5;
 
 const questions = [
     {
-        question:'Q', answerKey:
+        question:'Q1', answerKey:
         [
-            {answer: 'answer', correct: true}, {answer: 'answer', correct: false}, {answer: 'answer', correct: false}, {answer: 'answer', correct: false}
+            {answer: 'a', correct: true}, {answer: 'b', correct: false}, {answer: 'c', correct: false}, {answer: 'd', correct: false}
         ]
     },
     {
-        question:'Q', answerKey:
+        question:'Q2', answerKey:
         [
-            {answer: 'answer', correct: false}, {answer: 'answer', correct: false}, {answer: 'answer', correct: true}, {answer: 'answer', correct: false}
+            {answer: 'a', correct: true}, {answer: 'b', correct: false}, {answer: 'c', correct: false}, {answer: 'd', correct: false}
         ]
     }
 ]
 
-//START BUTTON
+const countdownClock = setInterval(countdown, 1000);
 
+//START BUTTON
+let questionIndex = 0;
 startButton.addEventListener('click', function() {
-showQuestions();
-showAnswers();
+showNextQuestion(questionIndex);
 countdown();
 });
 
 //RESET BUTTON
 
 resetButton.addEventListener('click', function() {
-clearInterval(interval);
-timer.textContent = startingTime;
-var startingTime = 60;
+clearInterval(countdownClock);
+timer.textContent = remainingTime;
 })
 
 //QUESTION SECTION
 
-var showQuestions = function() {
-    questions.textContent='This is a test question.'
+const showNextQuestion = (questionIndex) => {
+    const question = questions[questionIndex];
+    questionArea.textContent=question.question;
+    answerA.textContent=question.answerKey[0].answer;
+    answerB.textContent=question.answerKey[1].answer;
+    answerC.textContent=question.answerKey[2].answer;
+    answerD.textContent=question.answerKey[3].answer;
 };
 
 
 
-//ANSWER SECTION
-
-var answerList = ['a', 'b', 'c', 'd']
-var showAnswers = function() {
-    answerList.forEach((answer)=> {
-        document.querySelector('.answer').textContent = answer;
-    });
+const onAnswer = (name) => {
+    // CHECK IF ANSWER IS CORRECT
+    // QUESTIONINDEX IS CURRENT QUESTION - NAME IS THE ANSWER USER CHOSE FOR QUESTION
+    const question = questions[questionIndex];
+    const answers = question.answerKey;
+    const answer = answers.find(({answer}) => answer === name);
+    // ANSWER.CORRECT - ADD TO SCORE IF TRUE - DELETE FROM TIME IF FALSE - IF ELSE STATEMENT -- remaining time =- penaltyTime
+    // GET NEXT QUESTION 
+    questionIndex++;
+    if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
+        console.log('done');                // REPLACE WITH SOMETHING BETTER
+        clearInterval(countdownClock);
+    } else {
+        showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
+    };
 };
 
-var answerElection = function(){
-
-}
+answerA.addEventListener('click', function(){
+   onAnswer('a');
+});
+answerB.addEventListener('click', function(){
+    onAnswer('b');
+ });
+ answerC.addEventListener('click', function(){
+    onAnswer('c');
+ });
+ answerD.addEventListener('click', function(){
+    onAnswer('d');
+ });
 
 
 //TIMER SECTION
 
-const interval = setInterval(countdown, 1000);
-
 function countdown() {
-    timer.textContent=startingTime;
-    startingTime--;
-     if (startingTime === 0 ) {
+    timer.textContent=remainingTime;
+    remainingTime--;
+     if (remainingTime === 0 ) {
          timer.textContent = 'PENCILS DOWN! 📝';
-         clearInterval(interval);
+         clearInterval(countdownClock);
+         remainingTime = fullTime;
      };
-
     };
 
 //HIGHSCORE SECTION

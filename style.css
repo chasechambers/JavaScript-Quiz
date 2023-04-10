@@ -6,7 +6,6 @@ body {
 .reset {
     background-color: blue;
    color: white;
-   justify-content:space-between;
 }
 
 /* .question-box {

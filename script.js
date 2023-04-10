@@ -1,10 +1,26 @@
-var questions = document.querySelector('.question');
-var startButton = document.querySelector('.start');
-var resetButton = document.querySelector('.reset');
-var answers = document.querySelector('.answer')
-var timer = document.querySelector('.timer')
-var btn = document.querySelector('.btn')
-var startingTime = 60;
+const questionArea = document.getElementById('question');
+const startButton = document.querySelector('.start');
+const resetButton = document.querySelector('.reset');
+const answers = document.querySelector('.answer')
+const timer = document.querySelector('.timer')
+const btn = document.querySelector('.btn')
+var startingTime = 10;
+
+const questions = [
+    {
+        question:'Q', answerKey:
+        [
+            {answer: 'answer', correct: true}, {answer: 'answer', correct: false}, {answer: 'answer', correct: false}, {answer: 'answer', correct: false}
+        ]
+    },
+    {
+        question:'Q', answerKey:
+        [
+            {answer: 'answer', correct: false}, {answer: 'answer', correct: false}, {answer: 'answer', correct: true}, {answer: 'answer', correct: false}
+        ]
+    }
+]
+
 //START BUTTON
 
 startButton.addEventListener('click', function() {
@@ -16,7 +32,7 @@ countdown();
 //RESET BUTTON
 
 resetButton.addEventListener('click', function() {
-clearInterval(countdownClock);
+clearInterval(interval);
 timer.textContent = startingTime;
 var startingTime = 60;
 })
@@ -24,10 +40,8 @@ var startingTime = 60;
 //QUESTION SECTION
 
 var showQuestions = function() {
-    document.querySelector('.question').textContent='This is a test question.'
+    questions.textContent='This is a test question.'
 };
-
-
 
 
 
@@ -47,14 +61,16 @@ var answerElection = function(){
 
 //TIMER SECTION
 
-const countdownClock = setInterval(countdown, 1000);
+const interval = setInterval(countdown, 1000);
 
 function countdown() {
     timer.textContent=startingTime;
     startingTime--;
-     if (startingTime < 1 ) {
-         timer.textContent = 'PENCILS DOWN! 📝'
+     if (startingTime === 0 ) {
+         timer.textContent = 'PENCILS DOWN! 📝';
+         clearInterval(interval);
      };
+
     };
 
 //HIGHSCORE SECTION

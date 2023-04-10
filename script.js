@@ -4,36 +4,42 @@ const resetButton = document.querySelector('.reset');
 const answerA = document.getElementById('answerA');
 const answerAText = document.getElementById('answerAText');
 const answerB = document.getElementById('answerB');
+const answerBText = document.getElementById('answerBText');
 const answerC = document.getElementById('answerC');
+const answerCText = document.getElementById('answerCText');
 const answerD = document.getElementById('answerD');
+const answerDText = document.getElementById('answerDText');
 const timer = document.querySelector('.timer');
 const btn = document.querySelector('.btn');
 const fullTime = 60;
 let remainingTime = fullTime;
 let score = 0;
 const penaltyTime = 5;
+const countdownClock = setInterval(countdown, 1000);
+
 
 const questions = [
     {
         question:'Q1', answerKey:
         [
-            {key: 'a', answer: 'text of answer', correct: true}, {answer: 'b', correct: false}, {answer: 'c', correct: false}, {answer: 'd', correct: false}
+            {key: 'A', answer: 'text of answer', correct: true}, {key: 'B', answer: 'text of answer', correct: false}, {key: 'C', answer: 'text of answer', correct: false}, {key: 'D', answer: 'text of answer', correct: false}
         ]
     },
     {
         question:'Q2', answerKey:
         [
-            {answer: 'a', correct: true}, {answer: 'b', correct: false}, {answer: 'c', correct: false}, {answer: 'd', correct: false}
+            {key: 'A', answer: 'text of answer', correct: true}, {key: 'B', answer: 'text of answer', correct: false}, {key: 'C', answer: 'text of answer', correct: false}, {key: 'D', answer: 'text of answer', correct: false}
         ]
     }
 ]
 
-const countdownClock = setInterval(countdown, 1000);
+
 
 //START BUTTON
 let questionIndex = 0;
 startButton.addEventListener('click', function() {
 showNextQuestion(questionIndex);
+const countdownClock = setInterval(countdown, 1000);
 countdown();
 });
 
@@ -54,6 +60,9 @@ const showNextQuestion = (questionIndex) => {
     answerC.textContent = question.answerKey[2].key;
     answerD.textContent = question.answerKey[3].key;
     answerAText.textContent = question.answerKey[0].answer;
+    answerBText.textContent = question.answerKey[1].answer;
+    answerCText.textContent = question.answerKey[2].answer;
+    answerDText.textContent = question.answerKey[3].answer;
 };
 
 

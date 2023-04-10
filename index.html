@@ -10,20 +10,26 @@
 </head>
 <body>
 <header>
-    <button type="button" class="start">Start Quiz</button>
-    <button type="button" class="reset">Reset Quiz</button>
-<div class="timer">60</div>
+    <button type="button" class="start d-inline-flex p-2">Start Quiz</button>
+    <button type="button" class="reset d-inline-flex p-2">Reset Quiz</button>
+    <div id="title" class="d-inline-flex p-2">DO YOU KNOW JAVASCRIPT?!</div>
+
 <main>
-<!-- Vertically centered modal -->
+
+    <div class="timer">60</div>
 
 <div class ="question-box">
     <div class="question" id="question"></div>
     <div class="answer-box">
         <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-            <button type="button" class="btn btn-primary answer" id="answerA">TEST</button><div id="answerAText">TEST ANSWER INFO</div>
-            <button type="button" class="btn btn-primary answer" id="answerB">TEST</button><div id="answerBText">TEST ANSWER INFO</div>
-            <button type="button" class="btn btn-primary answer" id="answerC">TEST</button><div id="answerCText">TEST ANSWER INFO</div>
-            <button type="button" class="btn btn-primary answer" id="answerD">TEST</button><div id="answerDText">TEST ANSWER INFO</div>
+            <button type="button" class="btn btn-primary answer" id="answerA">A</button>
+            <div id="answerAText">TEST ANSWER INFO</div>
+            <button type="button" class="btn btn-primary answer" id="answerB">B</button>
+            <div id="answerBText">TEST ANSWER INFO</div>
+            <button type="button" class="btn btn-primary answer" id="answerC">C</button>
+            <div id="answerCText">TEST ANSWER INFO</div>
+            <button type="button" class="btn btn-primary answer" id="answerD">D</button>
+            <div id="answerDText">TEST ANSWER INFO</div>
           </div>
     </div>
 </div>

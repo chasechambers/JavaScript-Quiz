@@ -1,19 +1,48 @@
 body {
-    background-color: lightblue;
+    background-color: lightblue;   
+}
+
+header {
+    display: flexbox;
+    padding: 10px;
 }
 
 .start,
 .reset {
     background-color: blue;
    color: white;
+   padding: 10px;
 }
 
-/* .question-box {
-    display: none;
-} */
+.timer {
+    margin-top: 20px;
+    display: inline-flex;
+    border: black;
+    border-style: solid;
+    padding: 10px
+}
 
 .question-box {
     margin-top: 100px;
+    margin-right: 200px;
     margin-left: 100px;
-   
+   border: darkblue;
+   border-style: solid;
+   align-content: center;
+}
+
+#title {
+    font-weight: bold;
+    font-size: large;
+    justify-content: flex-end;
+    margin-right: 20px;
+    float: right;
+}
+
+
+.answer-box {
+   float: center;
+}
+.btn-group-vertical {
+    justify-content: center;
 }

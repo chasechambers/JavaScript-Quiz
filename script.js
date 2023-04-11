@@ -26,13 +26,13 @@ const questions = [
     {
         question:'What is JavaScript?', answerKey:
         [
-            {key: 'A', answer: 'text of answer', correct: true}, {key: 'B', answer: 'text of answer', correct: false}, {key: 'C', answer: 'text of answer', correct: false}, {key: 'D', answer: 'text of answer', correct: false}
+            {key: 'A', answer: 'An object-oriented computer programming language', correct: true}, {key: 'B', answer: 'The successor to Java', correct: false}, {key: 'C', answer: 'How I like my coffee', correct: false}, {key: 'D', answer: 'A CSS API', correct: false}
         ]
     },
     {
-        question:'Q2', answerKey:
+        question:'Which of these is a boolean?', answerKey:
         [
-            {key: 'A', answer: 'text of answer', correct: true}, {key: 'B', answer: 'text of answer', correct: false}, {key: 'C', answer: 'text of answer', correct: false}, {key: 'D', answer: 'text of answer', correct: false}
+            {key: 'A', answer: '"variable"', correct: true}, {key: '', answer: '8', correct: false}, {key: 'C', answer: 'true', correct: true}, {key: 'D', answer: '"8"', correct: false}
         ]
     }
 ]
@@ -67,77 +67,68 @@ const showNextQuestion = (questionIndex) => {
     answerDText.textContent = question.answerKey[3].answer;
 };
 
-
-
-const onAnswer = (name) => {
-    // CHECK IF ANSWER IS CORRECT
-    // QUESTIONINDEX IS CURRENT QUESTION - NAME IS THE ANSWER USER CHOSE FOR QUESTION
-    const question = questions[questionIndex];
-    const answers = question.answerKey;
-    const answer = answers.find((answers) => answers.key);
-
-  
-
     // ANSWER.CORRECT - ADD TO SCORE IF TRUE - DELETE FROM TIME IF FALSE - IF ELSE STATEMENT -- remaining time =- penaltyTime
     // GET NEXT QUESTION 
-    // questionIndex++;
+    nextButton => () {
+        questionIndex++;
     if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
         console.log('done');                // REPLACE WITH SOMETHING BETTER
         clearInterval(countdownClock);
     } else {
         showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
     };
-};
-
+    }
 answerA.addEventListener('click', function(){
 //    onAnswer('a');
    const question = questions[questionIndex];
-   const answers = question.answerKey;
-   const answer = answers.find(({answers}) => answers===true);
-  
-   console.log(question);
-   console.log(answers);
-   console.log(answer);
+   const answer = question.answerKey[0];
+    
+   if (answer.correct) {
+    console.log("You got it right");
+   } else {
+    console.log("you got it wrong")
+   }
+    
 });
 answerB.addEventListener('click', function(){
     // onAnswer('b');
 
     const question = questions[questionIndex];
-    const answers = question.answerKey;
-    const answer = answers.find(({answers}) => answers);
+   const answer = question.answerKey[1];
+     
+   if(answer.correct) {
+    console.log("You got it right")
+   } else {
+    console.log("you got it wrong")
+   }
+    
 
-    console.log('you clicked b')
-    if(answer) {
-        console.log('correct')
-    } else {
-        console.log('incorrect')
-    };
  });
 
 
  answerC.addEventListener('click', function(){
     // onAnswer('c');
     const question = questions[questionIndex];
-    const answers = question.answerKey;
-    const answer = answers.find(({answers}) => answers===true);
-    console.log('you clicked c')
-    if(answer) {
-        console.log('correct')
+    const answer = question.answerKey[2];
+      
+    if(answer.correct) {
+     console.log("You got it right")
     } else {
-        console.log('incorrect')
-    };
+     console.log("you got it wrong")
+    }
+     
  });
  answerD.addEventListener('click', function(){
     // onAnswer('d');
     const question = questions[questionIndex];
-    const answers = question.answerKey;
-    const answer = answers.find(({answers}) => answers);
-    console.log('you clicked d')
-    if(answer) {
-        console.log('correct')
+    const answer = question.answerKey[3];
+      
+    if(answer.correct) {
+     console.log("You got it right")
     } else {
-        console.log('incorrect')
-    };
+     console.log("you got it wrong")
+    }
+     
  });
 
 

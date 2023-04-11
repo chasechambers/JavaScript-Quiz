@@ -10,27 +10,59 @@
 </head>
 <body>
 <header>
-    <button type="button" class="start d-inline-flex p-2">Start Quiz</button>
-    <button type="button" class="reset d-inline-flex p-2">Reset Quiz</button>
-    <div id="title" class="d-inline-flex p-2">DO YOU KNOW JAVASCRIPT?!</div>
+    <h1 id="title" class="d-flex justify-content-center">DO YOU KNOW JAVASCRIPT?!</h1>
 
 <main>
+<div id="score-box" class="d-flex justify-content-between">
 
-    <div class="timer">60</div>
+    <div id="current-score-box">
+        <h2 id="current-score" >Current Score</h2>
+        <div id="current-score-number" class="text-center">0</div>
+    </div>  
 
-<div class ="question-box">
-    <div class="question" id="question"></div>
-    <div class="answer-box">
-        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-            <button type="button" class="btn btn-primary answer" id="answerA">A</button>
-            <div id="answerAText"></div>
-            <button type="button" class="btn btn-primary answer" id="answerB">B</button>
-            <div id="answerBText"></div>
-            <button type="button" class="btn btn-primary answer" id="answerC">C</button>
-            <div id="answerCText"></div>
-            <button type="button" class="btn btn-primary answer" id="answerD">D</button>
-            <div id="answerDText"></div>
+    <div id = "high-score-box">
+        <h2 id="high-score" >High Score</h2>
+        <div id="high-score-number" class="text-center">0</div>
+    </div>
+
+    <div id = "timer-box">
+        <h2 id="timer">Timer</h2>
+        <div id="timer-number" class="text-center">0</div>
+    </div>
+
+</div>
+
+<div class ="question-box hide">
+    <div id="question-section">
+        <div class="question d-flex justify-content-center" id="question">TEST</div>
+    </div>
+    <div class="answer-box border border-primary rounded d-flex justify-content-center">
+        <div class="d-flex justify-content-center btn-group-vertical">
+            <div id="answer-a-box" class="d-flex flex-row">
+                <button type="button" class ="btn btn-primary" id="answerA">A</button>
+                <div id="answerAText">TEST</div>
+            </div>
+            <div id="answer-b-box" class="d-flex flex-row">
+                <button type="button" class ="btn btn-primary" id="answerB">B</button>
+                <div id="answerBText">TEST</div>
+            </div>
+            <div id="answer-c-box" class="d-flex flex-row">
+                <button type="button" class ="btn btn-primary" id="answerC">C</button>
+                <div id="answerCText">TEST</div>
+            </div>
+            <div id="answer-d-box" class="d-flex flex-row">
+                <button type="button" class ="btn btn-primary" id="answerD">D</button>
+                <div id="answerDText">TEST</div>
+            </div>
           </div>
+    </div>
+</div>
+<div id = "main-buttons" class = "d-flex justify-content-center">
+    <div id="start-button">
+        <button type="button" class="btn btn-primary">Start Quiz</button>
+    </div>
+        <div id="reset-button" class="hide">
+        <button type="button" class="btn btn-primary">Reset Quiz</button>
     </div>
 </div>
 </main>

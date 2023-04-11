@@ -2,47 +2,59 @@ body {
     background-color: lightblue;   
 }
 
-header {
-    display: flexbox;
-    padding: 10px;
+#score-box {
+    padding: 15px;
 }
 
-.start,
-.reset {
-    background-color: blue;
-   color: white;
-   padding: 10px;
-}
-
-.timer {
-    margin-top: 20px;
-    display: inline-flex;
-    border: black;
-    border-style: solid;
-    padding: 10px
-}
-
-.question-box {
-    margin-top: 100px;
-    margin-right: 200px;
-    margin-left: 100px;
-   border: darkblue;
-   border-style: solid;
-   align-content: center;
-}
-
-#title {
-    font-weight: bold;
-    font-size: large;
-    justify-content: flex-end;
-    margin-right: 20px;
-    float: right;
+.hide {
+    display: none;
 }
 
 
-.answer-box {
-   float: center;
+/* ANSWER BUTTON SECTION */
+
+#answer-a-box{
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-.btn-group-vertical {
-    justify-content: center;
+
+#answer-b-box{
+    padding-bottom: 10px;
+}
+
+#answer-c-box{
+    
+}
+
+#answer-d-box{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#answerAText {
+    padding-left: 10px;
+}
+
+#answerBText {
+    padding-left: 10px;
+}
+
+#answerCText {
+    padding-left: 10px;
+}
+
+#answerDText {
+    padding-left: 10px;
+}
+
+
+/* START AND RESET BUTTON SECTION */
+
+#main-buttons {
+    margin-top: 30px;
+    padding: 30px;
+}
+
+#reset-button {
+    padding-left: 50px;
 }

@@ -1,6 +1,7 @@
-const questionArea = document.getElementById('question');
-const startButton = document.querySelector('.start');
-const resetButton = document.querySelector('.reset');
+// This section contains my DOM manipulation variables
+const questionArea = document.getElementById('question-section');
+const startButton = document.getElementById('start-button');
+const resetButton = document.getElementById('reset-button');
 const answerA = document.getElementById('answerA');
 const answerAText = document.getElementById('answerAText');
 const answerB = document.getElementById('answerB');
@@ -9,18 +10,21 @@ const answerC = document.getElementById('answerC');
 const answerCText = document.getElementById('answerCText');
 const answerD = document.getElementById('answerD');
 const answerDText = document.getElementById('answerDText');
-const timer = document.querySelector('.timer');
+const timer = document.getElementById('timer-number');
 const btn = document.querySelector('.btn');
+
+// This section has my global variables for functions
+
 const fullTime = 60;
 let remainingTime = fullTime;
 let score = 0;
 const penaltyTime = 5;
-const countdownClock = setInterval(countdown, 1000);
+// const countdownClock = setInterval(countdown, 1000);
 
 
 const questions = [
     {
-        question:'Q1', answerKey:
+        question:'What is JavaScript?', answerKey:
         [
             {key: 'A', answer: 'text of answer', correct: true}, {key: 'B', answer: 'text of answer', correct: false}, {key: 'C', answer: 'text of answer', correct: false}, {key: 'D', answer: 'text of answer', correct: false}
         ]
@@ -33,13 +37,11 @@ const questions = [
     }
 ]
 
-
-
 //START BUTTON
+
 let questionIndex = 0;
 startButton.addEventListener('click', function() {
 showNextQuestion(questionIndex);
-const countdownClock = setInterval(countdown, 1000);
 countdown();
 });
 
@@ -55,10 +57,10 @@ timer.textContent = remainingTime;
 const showNextQuestion = (questionIndex) => {
     const question = questions[questionIndex];
     questionArea.textContent=question.question;
-    answerA.textContent = question.answerKey[0].key;
-    answerB.textContent = question.answerKey[1].key;
-    answerC.textContent = question.answerKey[2].key;
-    answerD.textContent = question.answerKey[3].key;
+    answerA.innerText = question.answerKey[0].key;
+    answerB.innerText = question.answerKey[1].key;
+    answerC.innerText = question.answerKey[2].key;
+    answerD.innerText = question.answerKey[3].key;
     answerAText.textContent = question.answerKey[0].answer;
     answerBText.textContent = question.answerKey[1].answer;
     answerCText.textContent = question.answerKey[2].answer;
@@ -72,10 +74,13 @@ const onAnswer = (name) => {
     // QUESTIONINDEX IS CURRENT QUESTION - NAME IS THE ANSWER USER CHOSE FOR QUESTION
     const question = questions[questionIndex];
     const answers = question.answerKey;
-    const answer = answers.find(({answer}) => answer === name);
+    const answer = answers.find((answers) => answers.key);
+
+  
+
     // ANSWER.CORRECT - ADD TO SCORE IF TRUE - DELETE FROM TIME IF FALSE - IF ELSE STATEMENT -- remaining time =- penaltyTime
     // GET NEXT QUESTION 
-    questionIndex++;
+    // questionIndex++;
     if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
         console.log('done');                // REPLACE WITH SOMETHING BETTER
         clearInterval(countdownClock);
@@ -85,16 +90,54 @@ const onAnswer = (name) => {
 };
 
 answerA.addEventListener('click', function(){
-   onAnswer('a');
+//    onAnswer('a');
+   const question = questions[questionIndex];
+   const answers = question.answerKey;
+   const answer = answers.find(({answers}) => answers===true);
+  
+   console.log(question);
+   console.log(answers);
+   console.log(answer);
 });
 answerB.addEventListener('click', function(){
-    onAnswer('b');
+    // onAnswer('b');
+
+    const question = questions[questionIndex];
+    const answers = question.answerKey;
+    const answer = answers.find(({answers}) => answers);
+
+    console.log('you clicked b')
+    if(answer) {
+        console.log('correct')
+    } else {
+        console.log('incorrect')
+    };
  });
+
+
  answerC.addEventListener('click', function(){
-    onAnswer('c');
+    // onAnswer('c');
+    const question = questions[questionIndex];
+    const answers = question.answerKey;
+    const answer = answers.find(({answers}) => answers===true);
+    console.log('you clicked c')
+    if(answer) {
+        console.log('correct')
+    } else {
+        console.log('incorrect')
+    };
  });
  answerD.addEventListener('click', function(){
-    onAnswer('d');
+    // onAnswer('d');
+    const question = questions[questionIndex];
+    const answers = question.answerKey;
+    const answer = answers.find(({answers}) => answers);
+    console.log('you clicked d')
+    if(answer) {
+        console.log('correct')
+    } else {
+        console.log('incorrect')
+    };
  });
 
 

@@ -266,6 +266,7 @@ saveButton.addEventListener('click', function() {
       highScore = parseInt(score);
       // Store the high score
       localStorage.setItem('highScore', highScore);
+      highscoreNumber.textContent=highScore;
     }
     return highScore;
         });

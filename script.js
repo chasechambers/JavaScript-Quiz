@@ -23,7 +23,7 @@ const highscoreNumber = document.getElementById('high-score-number');
 let scoreTally = document.getElementById('current-score-number');
 
 // This section has my global variables for functions
-
+var highScore = localStorage.getItem('highScore') || 0;
 const fullTime = 30;
 let remainingTime = fullTime;
 let score = 0;
@@ -258,7 +258,7 @@ answerB.addEventListener('click', function(){
 
 // HIGHSCORE AND SAVE BUTTON SECTION
 
-var highScore = localStorage.getItem('highScore') || 0;
+
 
 saveButton.addEventListener('click', function() {
     // If the user has more points than the currently stored high score then

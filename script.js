@@ -75,7 +75,7 @@ showNextQuestion(questionIndex);
 //RESET BUTTON
 
 resetButton.addEventListener('click', function() {
-    
+
 })
 
 //QUESTION SECTION
@@ -95,17 +95,18 @@ const showNextQuestion = (questionIndex) => {
 
     // ANSWER.CORRECT - ADD TO SCORE IF TRUE - DELETE FROM TIME IF FALSE - IF ELSE STATEMENT -- remaining time =- penaltyTime
     // GET NEXT QUESTION 
-    nextButton.addEventListener('click', function() {
+nextButton.addEventListener('click', function() {
         questionIndex++;
         nextButton.setAttribute('class', 'hide')
         answerBox.removeAttribute('class', 'correct-answer');
         answerBox.removeAttribute('class', 'wrong-answer');
-    if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
+            if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
         questionBox.setAttribute('class', 'hide');
         quizOver.setAttribute('class', 'show');
         nextButton.setAttribute('class', 'hide');
         saveButton.setAttribute('class', 'show');
         finalScore.textContent = score;
+            } else { 
         showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
     };
 })

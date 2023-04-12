@@ -1,3 +1,4 @@
+
 // This section contains my DOM manipulation variables
 const questionArea = document.getElementById('question-section');
 const questionBox = document.getElementById('question-box');
@@ -15,10 +16,15 @@ const timer = document.getElementById('timer-number');
 const btn = document.querySelector('.btn');
 const answerBox = document.getElementById('answer-box');
 const nextButton = document.getElementById('next-button');
+const saveButton = document.getElementById('save-button');
+const quizOver = document.getElementById('quiz-over-box');
+const finalScore = document.getElementById('final-score')
+const highscoreNumber = document.getElementById('high-score-Number');
 let scoreTally = document.getElementById('current-score-number');
 
 // This section has my global variables for functions
-
+const highscore = 0;
+let currentHighScore = highscore;
 const fullTime = 60;
 let remainingTime = fullTime;
 let score = 0;
@@ -46,7 +52,7 @@ const questions = [
     {
         question:'Which of these is an ID tag indicator in CSS?', answerKey:
         [
-            {key: 'A', answer: '.id', correct: false}, {key: 'B', answer: '#id, correct: true'}, {key: 'C', answer: 'id', correct: false}, {key: 'D', answer: '$', correct: false}
+            {key: 'A', answer: '.id', correct: false}, {key: 'B', answer: '#id', correct: true}, {key: 'C', answer: 'id', correct: false}, {key: 'D', answer: '$', correct: false}
         ]
     },
     {
@@ -60,26 +66,23 @@ const questions = [
 //START BUTTON
 
 let questionIndex = 0;
-score
 startButton.addEventListener('click', function() {
 questionBox.setAttribute('class', 'show');
 startButton.setAttribute('class', 'hide')
 showNextQuestion(questionIndex);
-countdown();
 });
 
 //RESET BUTTON
 
 resetButton.addEventListener('click', function() {
-clearInterval(countdownClock);
-timer.textContent = remainingTime;
+    
 })
 
 //QUESTION SECTION
 
 const showNextQuestion = (questionIndex) => {
     const question = questions[questionIndex];
-    questionArea.textContent=question.question;
+    questionArea.textContent = question.question;
     answerA.innerText = question.answerKey[0].key;
     answerB.innerText = question.answerKey[1].key;
     answerC.innerText = question.answerKey[2].key;
@@ -98,14 +101,20 @@ const showNextQuestion = (questionIndex) => {
         answerBox.removeAttribute('class', 'correct-answer');
         answerBox.removeAttribute('class', 'wrong-answer');
     if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
-        console.log('done');                // REPLACE WITH SOMETHING BETTER
-        clearInterval(countdownClock);
-    } else {
+        questionBox.setAttribute('class', 'hide');
+        quizOver.setAttribute('class', 'show');
+        nextButton.setAttribute('class', 'hide');
+        saveButton.setAttribute('class', 'show');
+        finalScore.textContent = score;
         showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
     };
 })
+
+
+
+// ANSWER BUTTONS
+
 answerA.addEventListener('click', function(){
-//    onAnswer('a');
    const question = questions[questionIndex];
    const answer = question.answerKey[0];
   
@@ -113,37 +122,38 @@ answerA.addEventListener('click', function(){
     answerBox.setAttribute('class','correct-answer');
     score+=25;
     scoreTally.textContent = score;
-    console.log(score);
    } else {
     answerBox.setAttribute('class','wrong-answer');
-   }
-   nextButton.setAttribute('class', 'show')
-});
-answerB.addEventListener('click', function(){
-    // onAnswer('b');
+}
+    nextButton.removeAttribute('class', 'hide');
+}
+);
 
+answerB.addEventListener('click', function(){
     const question = questions[questionIndex];
-   const answer = question.answerKey[1];
-     
-   if (answer.correct) {
-    answerBox.setAttribute('class','correct-answer');
+    const answer = question.answerKey[1];
+    if (answer.correct) {
+        answerBox.setAttribute('class','correct-answer');
+        score+=25;
+        scoreTally.textContent = score;
    } else {
-    answerBox.setAttribute('class','wrong-answer');
-   }
-   nextButton.setAttribute('class', 'show')
-});
+        answerBox.setAttribute('class','wrong-answer')}
+        nextButton.removeAttribute('class', 'hide');
+    }
+);
 
  answerC.addEventListener('click', function(){
-    // onAnswer('c');
     const question = questions[questionIndex];
     const answer = question.answerKey[2];
       
     if (answer.correct) {
         answerBox.setAttribute('class','correct-answer');
+        score+=25;
+        scoreTally.textContent = score;
        } else {
         answerBox.setAttribute('class','wrong-answer');
-       }
-       nextButton.setAttribute('class', 'show')
+    }
+       nextButton.removeAttribute('class', 'hide');
     });
      
  answerD.addEventListener('click', function(){
@@ -153,10 +163,12 @@ answerB.addEventListener('click', function(){
       
     if (answer.correct) {
         answerBox.setAttribute('class','correct-answer');
+        score+=25;
+        scoreTally.textContent = score;
        } else {
         answerBox.setAttribute('class','wrong-answer');
        }
-       nextButton.setAttribute('class', 'show')
+        nextButton.removeAttribute('class', 'hide');
     });
 
 //TIMER SECTION
@@ -171,11 +183,18 @@ function countdown() {
      };
     };
 
-//HIGHSCORE SECTION
-var highscore = function(){
+// HIGHSCORE SECTION
 
+var saveToLocal = () => {
+    localStorage.setItem('highscore', score);
+    saveButton.addEventListener('click', saveToLocal);
+
+var storedInput = localStorage.getItem('highscore');
+highscoreNumber.textContent = currentHighScore;
+
+if(storedInput < currentHighScore) {
+     highscoreNumber.textContent = currentHighScore;
+ }  else {
+     finalScore.textContent = storedInput + " . It was not higher than your current highscore."
+ }
 }
-
-
-// localStorage.getItem(finalScore);
-// localStorage.setItem(finalScore, score)

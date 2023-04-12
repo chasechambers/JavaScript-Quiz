@@ -1,9 +1,7 @@
 body {
     background-color: lightblue;   
 }
-div {
-    display: inline-block;
-}
+
 #score-box {
     padding: 15px;
 }
@@ -13,7 +11,8 @@ div {
     display: none;
 }
 .show {
-    display: flex-inline-block;
+    display: flex;
+    
 }
 
 /* ANSWER BUTTON SECTION */
@@ -29,12 +28,11 @@ div {
 
 .wrong-answer{
     background-color: red;
-    display: flex-inline-block;
 }
 
 .correct-answer{
     background-color: green;
-    display: flex-inline-block;
+    
 }
 
 #answer-d-box{
@@ -59,7 +57,7 @@ div {
 }
 
 
-/* START AND RESET BUTTON SECTION */
+/* START, RESET, NEXT BUTTON SECTION */
 
 #main-buttons {
     margin-top: 30px;
@@ -72,4 +70,10 @@ div {
 
 #next-button {
     padding-left: 50px;
+}
+
+/* QUIZ OVER */
+
+#quiz-over-box {
+    text-align: center;
 }

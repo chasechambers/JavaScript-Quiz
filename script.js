@@ -99,17 +99,6 @@ resetButton.addEventListener('click', function() {
     };
 });
 
-saveButton.addEventListener('click', function() {
-// If the user has more points than the currently stored high score then
-if (score > highScore) {
-  highScore = parseInt(score);
-  // Store the high score
-  localStorage.setItem('highScore', highScore);
-}
-return highScore;
-    });
-
-
 // QUESTIONS AND ANSWERS
 
 const questions = [
@@ -157,6 +146,7 @@ const showNextQuestion = (questionIndex) => {
 };
 
 // STOPS USER FROM CLICKING TO INCREASE SCORE/DECREASE TIME
+
 var addUpScoreA = () => {
     const question = questions[questionIndex];
     const answer = question.answerKey[0];
@@ -266,6 +256,16 @@ answerB.addEventListener('click', function(){
     });
 
 
-// HIGHSCORE SECTION
+// HIGHSCORE AND SAVE BUTTON SECTION
 
 var highScore = localStorage.getItem('highScore') || 0;
+
+saveButton.addEventListener('click', function() {
+    // If the user has more points than the currently stored high score then
+    if (score > highScore) {
+      highScore = parseInt(score);
+      // Store the high score
+      localStorage.setItem('highScore', highScore);
+    }
+    return highScore;
+        });

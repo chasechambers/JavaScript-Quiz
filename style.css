@@ -1,16 +1,20 @@
 body {
     background-color: lightblue;   
 }
-
+div {
+    display: inline-block;
+}
 #score-box {
     padding: 15px;
 }
 
-#question-box {
-    
+
+.hide {
+    display: none;
 }
-
-
+.show {
+    display: flex-inline-block;
+}
 
 /* ANSWER BUTTON SECTION */
 
@@ -23,8 +27,14 @@ body {
     padding-bottom: 10px;
 }
 
-#answer-c-box{
-    
+.wrong-answer{
+    background-color: red;
+    display: flex-inline-block;
+}
+
+.correct-answer{
+    background-color: green;
+    display: flex-inline-block;
 }
 
 #answer-d-box{
@@ -57,5 +67,9 @@ body {
 }
 
 #reset-button {
+    padding-left: 50px;
+}
+
+#next-button {
     padding-left: 50px;
 }

@@ -7,14 +7,6 @@ body {
 }
 
 
-.hide {
-    display: none;
-}
-.show {
-    display: flex;
-    
-}
-
 /* ANSWER BUTTON SECTION */
 
 #answer-a-box{
@@ -26,13 +18,8 @@ body {
     padding-bottom: 10px;
 }
 
-.wrong-answer{
-    background-color: red;
-}
-
-.correct-answer{
-    background-color: green;
-    
+.hide {
+    display: none;
 }
 
 #answer-d-box{

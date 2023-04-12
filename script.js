@@ -25,16 +25,68 @@ let scoreTally = document.getElementById('current-score-number');
 // This section has my global variables for functions
 const highscore = 0;
 let currentHighScore = highscore;
-const fullTime = 60;
+const fullTime = 10;
 let remainingTime = fullTime;
 let score = 0;
 const penaltyTime = 5;
 
+//TIMER SECTION
+
+var countdown = setInterval(function() {
+    timer.textContent=remainingTime;
+    remainingTime--;
+    if (remainingTime < 0) {
+        timer.textContent = "Pencils down! 📝";
+        clearInterval(countdown);
+        nextButton.style.display = "none";
+        questionBox.style.display = "none";
+        quizOver.style.display = "initial";
+        nextButton.style.display = "none";
+        saveButton.style.display = "initial";
+        finalScore.textContent = score;
+    }
+
+}, 1000);
+    
 
 
 
-// const countdownClock = setInterval(countdown, 1000);
+// START BUTTON
 
+let questionIndex = 0;
+startButton.addEventListener('click', function() {
+questionBox.style.display = "initial";
+startButton.style.display = "none"; 
+showNextQuestion(questionIndex);
+countdown();
+});
+
+// RESET BUTTON
+
+resetButton.addEventListener('click', function() {
+
+});
+
+// NEXT BUTTON - GET NEXT QUESTION OR STOP
+
+    nextButton.addEventListener('click', function() {
+        questionIndex++;
+        nextButton.style.display = "none";
+        answerBox.style.backgroundColor = "lightblue";
+        
+            if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
+                nextButton.style.display = "none";
+                questionBox.style.display = "none";
+                quizOver.style.display = "initial";
+                nextButton.style.display = "none";
+                saveButton.style.display = "initial";
+                finalScore.textContent = score;
+            } else { 
+        showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
+    };
+})
+
+// QUESTIONS AND ANSWERS
 
 const questions = [
     {
@@ -63,22 +115,9 @@ const questions = [
     }
 ]
 
-//START BUTTON
 
-let questionIndex = 0;
-startButton.addEventListener('click', function() {
-questionBox.setAttribute('class', 'show');
-startButton.setAttribute('class', 'hide')
-showNextQuestion(questionIndex);
-});
 
-//RESET BUTTON
-
-resetButton.addEventListener('click', function() {
-
-})
-
-//QUESTION SECTION
+// QUESTION SECTION
 
 const showNextQuestion = (questionIndex) => {
     const question = questions[questionIndex];
@@ -93,23 +132,60 @@ const showNextQuestion = (questionIndex) => {
     answerDText.textContent = question.answerKey[3].answer;
 };
 
-    // ANSWER.CORRECT - ADD TO SCORE IF TRUE - DELETE FROM TIME IF FALSE - IF ELSE STATEMENT -- remaining time =- penaltyTime
-    // GET NEXT QUESTION 
-nextButton.addEventListener('click', function() {
-        questionIndex++;
-        nextButton.setAttribute('class', 'hide')
-        answerBox.removeAttribute('class', 'correct-answer');
-        answerBox.removeAttribute('class', 'wrong-answer');
-            if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
-        questionBox.setAttribute('class', 'hide');
-        quizOver.setAttribute('class', 'show');
-        nextButton.setAttribute('class', 'hide');
-        saveButton.setAttribute('class', 'show');
-        finalScore.textContent = score;
-            } else { 
-        showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
-    };
-})
+// STOPS USER FROM CLICKING TO INCREASE SCORE/DECREASE TIME
+var addUpScoreA = () => {
+    const question = questions[questionIndex];
+    const answer = question.answerKey[0];
+    if (answer.correct) {
+        score+=25; 
+    } else {
+        remainingTime - penaltyTime;
+    }
+    scoreTally.textContent = score;
+    remainingTime.textContent;
+};
+
+var addUpScoreB = () => {
+    const question = questions[questionIndex];
+    const answer = question.answerKey[1];
+    if (answer.correct) {
+        score+=25; 
+    } else {
+        remainingTime - penaltyTime;
+    }
+    scoreTally.textContent = score;
+    remainingTime.textContent;
+};
+
+var addUpScoreC = () => {
+    const question = questions[questionIndex];
+    const answer = question.answerKey[2];
+    if (answer.correct) {
+        score+=25; 
+    } else {
+        remainingTime - penaltyTime;
+    }
+    scoreTally.textContent = score;
+    remainingTime.textContent;
+};
+
+var addUpScoreD = () => {
+    const question = questions[questionIndex];
+    const answer = question.answerKey[3];
+    if (answer.correct) {
+        score+=25; 
+    } else {
+        remainingTime - penaltyTime;
+    }
+    scoreTally.textContent = score;
+    remainingTime.textContent;
+};
+
+
+answerA.addEventListener('click', addUpScoreA, {once: true});
+answerB.addEventListener('click', addUpScoreB, {once: true});
+answerC.addEventListener('click', addUpScoreC, {once: true});
+answerD.addEventListener('click', addUpScoreD, {once: true});
 
 
 
@@ -120,41 +196,36 @@ answerA.addEventListener('click', function(){
    const answer = question.answerKey[0];
   
    if (answer.correct) {
-    answerBox.setAttribute('class','correct-answer');
-    score+=25;
-    scoreTally.textContent = score;
+    answerBox.style.backgroundColor = "green";
    } else {
-    answerBox.setAttribute('class','wrong-answer');
+    answerBox.style.backgroundColor = "red";
 }
-    nextButton.removeAttribute('class', 'hide');
-}
-);
+    nextButton.style.display = "initial";
+});
+
+
 
 answerB.addEventListener('click', function(){
     const question = questions[questionIndex];
     const answer = question.answerKey[1];
     if (answer.correct) {
-        answerBox.setAttribute('class','correct-answer');
-        score+=25;
-        scoreTally.textContent = score;
-   } else {
-        answerBox.setAttribute('class','wrong-answer')}
-        nextButton.removeAttribute('class', 'hide');
+        answerBox.style.backgroundColor = "green";
+       } else {
+        answerBox.style.backgroundColor = "red";
     }
-);
+        nextButton.style.display = "initial";
+    });
 
  answerC.addEventListener('click', function(){
     const question = questions[questionIndex];
     const answer = question.answerKey[2];
       
     if (answer.correct) {
-        answerBox.setAttribute('class','correct-answer');
-        score+=25;
-        scoreTally.textContent = score;
+        answerBox.style.backgroundColor = "green";
        } else {
-        answerBox.setAttribute('class','wrong-answer');
+        answerBox.style.backgroundColor = "red";
     }
-       nextButton.removeAttribute('class', 'hide');
+    nextButton.style.display = "initial";
     });
      
  answerD.addEventListener('click', function(){
@@ -163,26 +234,13 @@ answerB.addEventListener('click', function(){
     const answer = question.answerKey[3];
       
     if (answer.correct) {
-        answerBox.setAttribute('class','correct-answer');
-        score+=25;
-        scoreTally.textContent = score;
+        answerBox.style.backgroundColor = "green";
        } else {
-        answerBox.setAttribute('class','wrong-answer');
-       }
-        nextButton.removeAttribute('class', 'hide');
+        answerBox.style.backgroundColor = "red";
+    }
+    nextButton.style.display = "initial";
     });
 
-//TIMER SECTION
-
-function countdown() {
-    timer.textContent=remainingTime;
-    remainingTime--;
-     if (remainingTime === 0 ) {
-         timer.textContent = 'PENCILS DOWN! 📝';
-         clearInterval(countdownClock);
-         remainingTime = fullTime;
-     };
-    };
 
 // HIGHSCORE SECTION
 
@@ -197,5 +255,5 @@ if(storedInput < currentHighScore) {
      highscoreNumber.textContent = currentHighScore;
  }  else {
      finalScore.textContent = storedInput + " . It was not higher than your current highscore."
- }
+ };
 }

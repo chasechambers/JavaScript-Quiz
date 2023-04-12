@@ -94,6 +94,7 @@ resetButton.addEventListener('click', function() {
                 nextButton.style.display = "none";
                 saveButton.style.display = "initial";
                 finalScore.textContent = score;
+                clearInterval(countdown);
             } else { 
         showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
     };

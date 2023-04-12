@@ -23,7 +23,7 @@ const highscoreNumber = document.getElementById('high-score-number');
 let scoreTally = document.getElementById('current-score-number');
 
 // This section has my global variables for functions
-var highScore = localStorage.getItem('highScore') || 0;
+
 const fullTime = 30;
 let remainingTime = fullTime;
 let score = 0;
@@ -67,17 +67,17 @@ countdownFunction();
 // RESET BUTTON
 
 resetButton.addEventListener('click', function() {
-    clearInterval(countdown);
-    timer.textContent = fullTime;
-    startButton.style.display = "initial";
-    questionBox.style.display = "none";
-    nextButton.style.display = "none";
-    scoreTally.textContent = highscore;
-    quizOver.style.display = "none";
-    saveButton.style.display = "none";
-    resetButton.style.display = "none";
-    questionIndex = 0;
-
+    // clearInterval(countdown);
+    // timer.textContent = fullTime;
+    // startButton.style.display = "initial";
+    // questionBox.style.display = "none";
+    // nextButton.style.display = "none";
+    // scoreTally.textContent = highScore;
+    // quizOver.style.display = "none";
+    // saveButton.style.display = "none";
+    // resetButton.style.display = "none";
+    // questionIndex = 0;
+    location.reload() 
 });
 
 // NEXT BUTTON - GET NEXT QUESTION OR STOP
@@ -163,7 +163,7 @@ var addUpScoreA = () => {
     if (answer.correct) {
         score+=25; 
     } else {
-        remainingTime - 5;
+        remainingTime-=penaltyTime;
     }
     scoreTally.textContent = score;
     remainingTime.textContent;
@@ -175,7 +175,7 @@ var addUpScoreB = () => {
     if (answer.correct) {
         score+=25; 
     } else {
-        remainingTime - penaltyTime;
+        remainingTime-=penaltyTime;
     }
     scoreTally.textContent = score;
     remainingTime.textContent;
@@ -187,7 +187,7 @@ var addUpScoreC = () => {
     if (answer.correct) {
         score+=25; 
     } else {
-        remainingTime - penaltyTime;
+        remainingTime-=penaltyTime;
     }
     scoreTally.textContent = score;
     remainingTime.textContent;
@@ -199,7 +199,7 @@ var addUpScoreD = () => {
     if (answer.correct) {
         score+=25; 
     } else {
-        remainingTime - penaltyTime;
+        remainingTime-=penaltyTime;
     }
     scoreTally.textContent = score;
     remainingTime.textContent;
@@ -267,3 +267,5 @@ answerB.addEventListener('click', function(){
 
 
 // HIGHSCORE SECTION
+
+var highScore = localStorage.getItem('highScore') || 0;

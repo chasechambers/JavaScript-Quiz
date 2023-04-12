@@ -59,6 +59,10 @@ body {
     padding-left: 50px;
 }
 
+#save-button {
+    padding-left: 50px;
+}
+
 /* QUIZ OVER */
 
 #quiz-over-box {

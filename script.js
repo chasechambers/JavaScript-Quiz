@@ -19,7 +19,7 @@ const nextButton = document.getElementById('next-button');
 const saveButton = document.getElementById('save-button');
 const quizOver = document.getElementById('quiz-over-box');
 const finalScore = document.getElementById('final-score')
-const highscoreNumber = document.getElementById('high-score-Number');
+const highscoreNumber = document.getElementById('high-score-number');
 let scoreTally = document.getElementById('current-score-number');
 
 // This section has my global variables for functions
@@ -29,10 +29,13 @@ const fullTime = 10;
 let remainingTime = fullTime;
 let score = 0;
 const penaltyTime = 5;
+var countdown;
 
 //TIMER SECTION
+timer.textContent = fullTime;
 
-var countdown = setInterval(function() {
+function countdownFunction() {
+    countdown = setInterval(function() {
     timer.textContent=remainingTime;
     remainingTime--;
     if (remainingTime < 0) {
@@ -47,8 +50,7 @@ var countdown = setInterval(function() {
     }
 
 }, 1000);
-    
-
+};
 
 
 // START BUTTON
@@ -57,13 +59,26 @@ let questionIndex = 0;
 startButton.addEventListener('click', function() {
 questionBox.style.display = "initial";
 startButton.style.display = "none"; 
+resetButton.style.display = "initial";
+nextButton.style.display = "initial";
 showNextQuestion(questionIndex);
-countdown();
+countdownFunction();
 });
 
 // RESET BUTTON
 
 resetButton.addEventListener('click', function() {
+    clearInterval(countdown);
+    timer.textContent = fullTime;
+    startButton.style.display = "initial";
+    questionBox.style.display = "none";
+    nextButton.style.display = "none";
+    scoreTally.textContent = highscore;
+    quizOver.style.display = "none";
+    saveButton.style.display = "none";
+    resetButton.style.display = "none";
+
+
 
 });
 
@@ -81,8 +96,14 @@ resetButton.addEventListener('click', function() {
                 nextButton.style.display = "none";
                 saveButton.style.display = "initial";
                 finalScore.textContent = score;
+                    if (score > currentHighScore) {
+                        currentHighScore = score;
+                    localStorage.setItem("highscores", score); 
+                    highscoreNumber = score;
+                    };
             } else { 
         showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
+        
     };
 })
 
@@ -98,7 +119,7 @@ const questions = [
     {
         question:'Which of these is a boolean?', answerKey:
         [
-            {key: 'A', answer: '"variable"', correct: true}, {key: 'B', answer: '8', correct: false}, {key: 'C', answer: 'true', correct: true}, {key: 'D', answer: '"8"', correct: false}
+            {key: 'A', answer: '"variable"', correct: false}, {key: 'B', answer: '8', correct: false}, {key: 'C', answer: 'true', correct: true}, {key: 'D', answer: '"8"', correct: false}
         ]
     },
     {
@@ -244,16 +265,4 @@ answerB.addEventListener('click', function(){
 
 // HIGHSCORE SECTION
 
-var saveToLocal = () => {
-    localStorage.setItem('highscore', score);
-    saveButton.addEventListener('click', saveToLocal);
-
-var storedInput = localStorage.getItem('highscore');
-highscoreNumber.textContent = currentHighScore;
-
-if(storedInput < currentHighScore) {
-     highscoreNumber.textContent = currentHighScore;
- }  else {
-     finalScore.textContent = storedInput + " . It was not higher than your current highscore."
- };
-}
+localStorage.setItem("highscores", score);

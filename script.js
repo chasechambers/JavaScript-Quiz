@@ -23,20 +23,19 @@ const highscoreNumber = document.getElementById('high-score-number');
 let scoreTally = document.getElementById('current-score-number');
 
 // This section has my global variables for functions
-const highscore = 0;
-let currentHighScore = highscore;
-const fullTime = 10;
+var highScore = localStorage.getItem('highScore') || 0;
+const fullTime = 30;
 let remainingTime = fullTime;
 let score = 0;
 const penaltyTime = 5;
 var countdown;
-
+highscoreNumber.textContent=highScore;
 //TIMER SECTION
-timer.textContent = fullTime;
+
 
 function countdownFunction() {
     countdown = setInterval(function() {
-    timer.textContent=remainingTime;
+        timer.textContent=remainingTime;
     remainingTime--;
     if (remainingTime < 0) {
         timer.textContent = "Pencils down! 📝";
@@ -77,8 +76,7 @@ resetButton.addEventListener('click', function() {
     quizOver.style.display = "none";
     saveButton.style.display = "none";
     resetButton.style.display = "none";
-
-
+    questionIndex = 0;
 
 });
 
@@ -96,16 +94,21 @@ resetButton.addEventListener('click', function() {
                 nextButton.style.display = "none";
                 saveButton.style.display = "initial";
                 finalScore.textContent = score;
-                    if (score > currentHighScore) {
-                        currentHighScore = score;
-                    localStorage.setItem("highscores", score); 
-                    highscoreNumber = score;
-                    };
             } else { 
         showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
-        
     };
-})
+});
+
+saveButton.addEventListener('click', function() {
+// If the user has more points than the currently stored high score then
+if (score > highScore) {
+  highScore = parseInt(score);
+  // Store the high score
+  localStorage.setItem('highScore', highScore);
+}
+return highScore;
+    });
+
 
 // QUESTIONS AND ANSWERS
 
@@ -160,7 +163,7 @@ var addUpScoreA = () => {
     if (answer.correct) {
         score+=25; 
     } else {
-        remainingTime - penaltyTime;
+        remainingTime - 5;
     }
     scoreTally.textContent = score;
     remainingTime.textContent;
@@ -264,5 +267,3 @@ answerB.addEventListener('click', function(){
 
 
 // HIGHSCORE SECTION
-
-localStorage.setItem("highscores", score);

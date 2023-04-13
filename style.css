@@ -3,11 +3,19 @@ body {
 }
 
 #score-box {
-    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 
 /* ANSWER BUTTON SECTION */
+
+#answer-box {
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 20px;
+}
 
 #answer-a-box{
     padding-top: 10px;
@@ -43,6 +51,11 @@ body {
     padding-left: 10px;
 }
 
+/* QUESTION SECTION */
+
+#question-section {
+    margin-top: 40px;
+}
 
 /* START, RESET, NEXT BUTTON SECTION */
 

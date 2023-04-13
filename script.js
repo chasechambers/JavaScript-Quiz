@@ -30,8 +30,8 @@ let score = 0;
 const penaltyTime = 5;
 var countdown;
 highscoreNumber.textContent=highScore;
-//TIMER SECTION
 
+//TIMER SECTION
 
 function countdownFunction() {
     countdown = setInterval(function() {
@@ -51,215 +51,112 @@ function countdownFunction() {
 }, 1000);
 };
 
-
 // START BUTTON
 
-let questionIndex = 0;
+let questionIndex = -1;
 startButton.addEventListener('click', function() {
 questionBox.style.display = "initial";
 startButton.style.display = "none"; 
 resetButton.style.display = "initial";
-nextButton.style.display = "initial";
-showNextQuestion(questionIndex);
+showNextQuestion();
 countdownFunction();
 });
 
 // RESET BUTTON
 
 resetButton.addEventListener('click', function() {
-    // clearInterval(countdown);
-    // timer.textContent = fullTime;
-    // startButton.style.display = "initial";
-    // questionBox.style.display = "none";
-    // nextButton.style.display = "none";
-    // scoreTally.textContent = highScore;
-    // quizOver.style.display = "none";
-    // saveButton.style.display = "none";
-    // resetButton.style.display = "none";
-    // questionIndex = 0;
     location.reload() 
-});
-
-// NEXT BUTTON - GET NEXT QUESTION OR STOP
-
-    nextButton.addEventListener('click', function() {
-        questionIndex++;
-        nextButton.style.display = "none";
-        answerBox.style.backgroundColor = "lightblue";
-        
-            if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
-                nextButton.style.display = "none";
-                questionBox.style.display = "none";
-                quizOver.style.display = "initial";
-                nextButton.style.display = "none";
-                saveButton.style.display = "initial";
-                finalScore.textContent = score;
-                clearInterval(countdown);
-            } else { 
-        showNextQuestion(questionIndex); // NOT OUT OF QUESTIONS - GET NEXT QUESTION
-    };
 });
 
 // QUESTIONS AND ANSWERS
 
 const questions = [
     {
-        question:'What is JavaScript?', answerKey:
-        [
-            {key: 'A', answer: 'An object-oriented computer programming language', correct: true}, {key: 'B', answer: 'The successor to Java', correct: false}, {key: 'C', answer: 'How I like my coffee', correct: false}, {key: 'D', answer: 'A CSS API', correct: false}
+        question:'What is JavaScript?', 
+        answerKey: [
+            {key: 'A', answer: 'An object-oriented computer programming language', correct: true}, 
+            {key: 'B', answer: 'The successor to Java', correct: false}, 
+            {key: 'C', answer: 'How I like my coffee', correct: false}, 
+            {key: 'D', answer: 'A CSS API', correct: false}
         ]
     },
     {
-        question:'Which of these is a boolean?', answerKey:
-        [
-            {key: 'A', answer: '"variable"', correct: false}, {key: 'B', answer: '8', correct: false}, {key: 'C', answer: 'true', correct: true}, {key: 'D', answer: '"8"', correct: false}
+        question:'Which of these is a boolean?', 
+        answerKey: [
+            {key: 'A', answer: '"variable"', correct: false}, 
+            {key: 'B', answer: '8', correct: false}, 
+            {key: 'C', answer: 'true', correct: true}, 
+            {key: 'D', answer: '"8"', correct: false}
         ]
     },
     {
-        question:'Which of these is an ID tag indicator in CSS?', answerKey:
-        [
-            {key: 'A', answer: '.id', correct: false}, {key: 'B', answer: '#id', correct: true}, {key: 'C', answer: 'id', correct: false}, {key: 'D', answer: '$', correct: false}
+        question:'Which of these is an ID tag indicator in CSS?', 
+        answerKey: [
+            {key: 'A', answer: '.id', correct: false}, 
+            {key: 'B', answer: '#id', correct: true}, 
+            {key: 'C', answer: 'id', correct: false}, 
+            {key: 'D', answer: '$', correct: false}
         ]
     },
     {
-        question:'Bootstrap was created by?', answerKey:
-        [
-            {key: 'A', answer: 'Facebook', correct: false}, {key: 'B', answer: 'MySpace', correct: false}, {key: 'C', answer: 'The Illuminati', correct: false}, {key: 'D', answer: 'Twitter', correct: true}
+        question:'Bootstrap was created by?', 
+        answerKey: [
+            {key: 'A', answer: 'Facebook', correct: false}, 
+            {key: 'B', answer: 'MySpace', correct: false}, 
+            {key: 'C', answer: 'The Illuminati', correct: false}, 
+            {key: 'D', answer: 'Twitter', correct: true}
         ]
     }
-]
-
-
+];
 
 // QUESTION SECTION
 
-const showNextQuestion = (questionIndex) => {
-    const question = questions[questionIndex];
-    questionArea.textContent = question.question;
-    answerA.innerText = question.answerKey[0].key;
-    answerB.innerText = question.answerKey[1].key;
-    answerC.innerText = question.answerKey[2].key;
-    answerD.innerText = question.answerKey[3].key;
-    answerAText.textContent = question.answerKey[0].answer;
-    answerBText.textContent = question.answerKey[1].answer;
-    answerCText.textContent = question.answerKey[2].answer;
-    answerDText.textContent = question.answerKey[3].answer;
-};
-
-// STOPS USER FROM CLICKING TO INCREASE SCORE/DECREASE TIME
-
-var addUpScoreA = () => {
-    const question = questions[questionIndex];
-    const answer = question.answerKey[0];
-    if (answer.correct) {
-        score+=25; 
-    } else {
-        remainingTime-=penaltyTime;
+const showNextQuestion = () => {
+    questionIndex++;
+    if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
+        nextButton.style.display = "none";
+        questionBox.style.display = "none";
+        quizOver.style.display = "initial";
+        nextButton.style.display = "none";
+        saveButton.style.display = "initial";
+        finalScore.textContent = score;
+        clearInterval(countdown);
+    } else { 
+        const question = questions[questionIndex];
+        questionArea.textContent = question.question;
+        answerA.innerText = question.answerKey[0].key;
+        answerB.innerText = question.answerKey[1].key;
+        answerC.innerText = question.answerKey[2].key;
+        answerD.innerText = question.answerKey[3].key;
+        answerAText.textContent = question.answerKey[0].answer;
+        answerBText.textContent = question.answerKey[1].answer;
+        answerCText.textContent = question.answerKey[2].answer;
+        answerDText.textContent = question.answerKey[3].answer;
     }
-    scoreTally.textContent = score;
-    remainingTime.textContent;
 };
-
-var addUpScoreB = () => {
-    const question = questions[questionIndex];
-    const answer = question.answerKey[1];
-    if (answer.correct) {
-        score+=25; 
-    } else {
-        remainingTime-=penaltyTime;
-    }
-    scoreTally.textContent = score;
-    remainingTime.textContent;
-};
-
-var addUpScoreC = () => {
-    const question = questions[questionIndex];
-    const answer = question.answerKey[2];
-    if (answer.correct) {
-        score+=25; 
-    } else {
-        remainingTime-=penaltyTime;
-    }
-    scoreTally.textContent = score;
-    remainingTime.textContent;
-};
-
-var addUpScoreD = () => {
-    const question = questions[questionIndex];
-    const answer = question.answerKey[3];
-    if (answer.correct) {
-        score+=25; 
-    } else {
-        remainingTime-=penaltyTime;
-    }
-    scoreTally.textContent = score;
-    remainingTime.textContent;
-};
-
-
-answerA.addEventListener('click', addUpScoreA, {once: true});
-answerB.addEventListener('click', addUpScoreB, {once: true});
-answerC.addEventListener('click', addUpScoreC, {once: true});
-answerD.addEventListener('click', addUpScoreD, {once: true});
-
-
 
 // ANSWER BUTTONS
 
-answerA.addEventListener('click', function(){
-   const question = questions[questionIndex];
-   const answer = question.answerKey[0];
-  
-   if (answer.correct) {
-    answerBox.style.backgroundColor = "green";
-   } else {
-    answerBox.style.backgroundColor = "red";
-}
-    nextButton.style.display = "initial";
-});
-
-
-
-answerB.addEventListener('click', function(){
+function addUpScore(keyIndex) {
     const question = questions[questionIndex];
-    const answer = question.answerKey[1];
+    const answer = question.answerKey[keyIndex];
     if (answer.correct) {
-        answerBox.style.backgroundColor = "green";
-       } else {
-        answerBox.style.backgroundColor = "red";
+        score+=25; 
+    } else {
+        remainingTime -= penaltyTime;
     }
-        nextButton.style.display = "initial";
-    });
+    scoreTally.textContent = score;
+    remainingTime.textContent;
+    showNextQuestion();
+};
 
- answerC.addEventListener('click', function(){
-    const question = questions[questionIndex];
-    const answer = question.answerKey[2];
-      
-    if (answer.correct) {
-        answerBox.style.backgroundColor = "green";
-       } else {
-        answerBox.style.backgroundColor = "red";
-    }
-    nextButton.style.display = "initial";
-    });
-     
- answerD.addEventListener('click', function(){
-    // onAnswer('d');
-    const question = questions[questionIndex];
-    const answer = question.answerKey[3];
-      
-    if (answer.correct) {
-        answerBox.style.backgroundColor = "green";
-       } else {
-        answerBox.style.backgroundColor = "red";
-    }
-    nextButton.style.display = "initial";
-    });
 
+answerA.addEventListener('click', function(){addUpScore(0)});
+answerB.addEventListener('click', function(){addUpScore(1)});
+answerC.addEventListener('click', function(){addUpScore(2)});
+answerD.addEventListener('click', function(){addUpScore(3)});
 
 // HIGHSCORE AND SAVE BUTTON SECTION
-
-
 
 saveButton.addEventListener('click', function() {
     // If the user has more points than the currently stored high score then

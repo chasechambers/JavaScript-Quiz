@@ -13,39 +13,34 @@ const answerCText = document.getElementById('answerCText');
 const answerD = document.getElementById('answerD');
 const answerDText = document.getElementById('answerDText');
 const timer = document.getElementById('timer-number');
-const btn = document.querySelector('.btn');
-const answerBox = document.getElementById('answer-box');
-const nextButton = document.getElementById('next-button');
 const saveButton = document.getElementById('save-button');
 const quizOver = document.getElementById('quiz-over-box');
 const finalScore = document.getElementById('final-score')
 const highscoreNumber = document.getElementById('high-score-number');
-let scoreTally = document.getElementById('current-score-number');
-
-// This section has my global variables for functions
-var highScore = localStorage.getItem('highScore') || 0;
+const finalScoreMessage = document.getElementById('final-score-message')
 const fullTime = 30;
+const penaltyTime = 5;
+
+// This section has my variables for functions
+let scoreTally = document.getElementById('current-score-number');
+let highScore = localStorage.getItem('highScore') || 0;
 let remainingTime = fullTime;
 let score = 0;
-const penaltyTime = 5;
-var countdown;
-highscoreNumber.textContent=highScore;
+let countdown;
 
 //TIMER SECTION
 
 function countdownFunction() {
     countdown = setInterval(function() {
         timer.textContent=remainingTime;
-    remainingTime--;
-    if (remainingTime < 0) {
-        timer.textContent = "Pencils down! 📝";
-        clearInterval(countdown);
-        nextButton.style.display = "none";
-        questionBox.style.display = "none";
-        quizOver.style.display = "initial";
-        nextButton.style.display = "none";
-        saveButton.style.display = "initial";
-        finalScore.textContent = score;
+        remainingTime--;
+            if (remainingTime < 0) {
+                timer.textContent = "Pencils down! 📝";
+                clearInterval(countdown);
+                questionBox.style.display = "none";
+                quizOver.style.display = "initial";
+                saveButton.style.display = "initial";
+                finalScore.textContent = score;
     }
 
 }, 1000);
@@ -55,11 +50,11 @@ function countdownFunction() {
 
 let questionIndex = -1;
 startButton.addEventListener('click', function() {
-questionBox.style.display = "initial";
-startButton.style.display = "none"; 
-resetButton.style.display = "initial";
-showNextQuestion();
-countdownFunction();
+    questionBox.style.display = "initial";
+    startButton.style.display = "none"; 
+    resetButton.style.display = "initial";
+    showNextQuestion();
+    countdownFunction();
 });
 
 // RESET BUTTON
@@ -109,29 +104,27 @@ const questions = [
     }
 ];
 
-// QUESTION SECTION
+// SHOW NEXT QUESTION FUNCTION - STARTS AT -1 AND THEN PROGRESSES UNTIL OUT OF QUESTIONS
 
 const showNextQuestion = () => {
     questionIndex++;
-    if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
-        nextButton.style.display = "none";
-        questionBox.style.display = "none";
-        quizOver.style.display = "initial";
-        nextButton.style.display = "none";
-        saveButton.style.display = "initial";
-        finalScore.textContent = score;
-        clearInterval(countdown);
-    } else { 
-        const question = questions[questionIndex];
-        questionArea.textContent = question.question;
-        answerA.innerText = question.answerKey[0].key;
-        answerB.innerText = question.answerKey[1].key;
-        answerC.innerText = question.answerKey[2].key;
-        answerD.innerText = question.answerKey[3].key;
-        answerAText.textContent = question.answerKey[0].answer;
-        answerBText.textContent = question.answerKey[1].answer;
-        answerCText.textContent = question.answerKey[2].answer;
-        answerDText.textContent = question.answerKey[3].answer;
+        if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
+            questionBox.style.display = "none";
+            quizOver.style.display = "initial";
+            saveButton.style.display = "initial";
+            finalScore.textContent = score;
+            clearInterval(countdown);
+        } else { 
+            const question = questions[questionIndex];
+            questionArea.textContent = question.question;
+            answerA.innerText = question.answerKey[0].key;
+            answerB.innerText = question.answerKey[1].key;
+            answerC.innerText = question.answerKey[2].key;
+            answerD.innerText = question.answerKey[3].key;
+            answerAText.textContent = question.answerKey[0].answer;
+            answerBText.textContent = question.answerKey[1].answer;
+            answerCText.textContent = question.answerKey[2].answer;
+            answerDText.textContent = question.answerKey[3].answer;
     }
 };
 
@@ -150,7 +143,6 @@ function addUpScore(keyIndex) {
     showNextQuestion();
 };
 
-
 answerA.addEventListener('click', function(){addUpScore(0)});
 answerB.addEventListener('click', function(){addUpScore(1)});
 answerC.addEventListener('click', function(){addUpScore(2)});
@@ -158,13 +150,18 @@ answerD.addEventListener('click', function(){addUpScore(3)});
 
 // HIGHSCORE AND SAVE BUTTON SECTION
 
+highscoreNumber.textContent=highScore;
+
 saveButton.addEventListener('click', function() {
     // If the user has more points than the currently stored high score then
     if (score > highScore) {
       highScore = parseInt(score);
+      finalScoreMessage.textContent = "You got a new highscore!"
       // Store the high score
       localStorage.setItem('highScore', highScore);
       highscoreNumber.textContent=highScore;
+    } else {
+        finalScoreMessage.textContent = "You did not set a new highscore. Try again!"
     }
     return highScore;
         });

@@ -13,10 +13,13 @@ const answerCText = document.getElementById('answerCText');
 const answerD = document.getElementById('answerD');
 const answerDText = document.getElementById('answerDText');
 const timer = document.getElementById('timer-number');
+const saveButtonGroup = document.getElementById('save-button-group');
 const saveButton = document.getElementById('save-button');
 const quizOver = document.getElementById('quiz-over-box');
 const finalScore = document.getElementById('final-score')
 const highscoreNumber = document.getElementById('high-score-number');
+const highscoreName = document.getElementById('high-score-name');
+const input = document.getElementById('input');
 const finalScoreMessage = document.getElementById('final-score-message')
 const fullTime = 30;
 const penaltyTime = 5;
@@ -24,9 +27,11 @@ const penaltyTime = 5;
 // This section has my variables for functions
 let scoreTally = document.getElementById('current-score-number');
 let highScore = localStorage.getItem('highScore') || 0;
+highscoreName.textContent = localStorage.getItem('name');
 let remainingTime = fullTime;
 let score = 0;
 let countdown;
+
 
 //TIMER SECTION
 
@@ -39,7 +44,7 @@ function countdownFunction() {
                 clearInterval(countdown);
                 questionBox.style.display = "none";
                 quizOver.style.display = "initial";
-                saveButton.style.display = "initial";
+                saveButtonGroup.style.display = "initial";
                 finalScore.textContent = score;
     }
 
@@ -111,7 +116,7 @@ const showNextQuestion = () => {
         if (questionIndex >= questions.length) {  // ARE WE OUT OF QUESTIONS?
             questionBox.style.display = "none";
             quizOver.style.display = "initial";
-            saveButton.style.display = "initial";
+            saveButtonGroup.style.display = "initial";
             finalScore.textContent = score;
             clearInterval(countdown);
         } else { 
@@ -155,11 +160,15 @@ highscoreNumber.textContent=highScore;
 saveButton.addEventListener('click', function() {
     // If the user has more points than the currently stored high score then
     if (score > highScore) {
-      highScore = parseInt(score);
-      finalScoreMessage.textContent = "You got a new highscore!"
+        highScore = parseInt(score);
+        finalScoreMessage.textContent = "You got a new highscore!"
       // Store the high score
-      localStorage.setItem('highScore', highScore);
-      highscoreNumber.textContent=highScore;
+        localStorage.setItem('name', input.value);
+        localStorage.setItem('highScore', highScore);
+    //   localStorage.setItem('name', )
+        highscoreName.textContent = input.value;
+        highscoreNumber.textContent = highScore;
+    
     } else {
         finalScoreMessage.textContent = "You did not set a new highscore. Try again!"
     }

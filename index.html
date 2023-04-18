@@ -22,6 +22,7 @@
 
     <div id = "high-score-box">
         <h2 id="high-score" >High Score</h2>
+        <h2 id="high-score-name" class="text-center"></h2>
         <h2 id="high-score-number" class="text-center">0</h2>
     </div>
 
@@ -72,8 +73,10 @@
     <div id="reset-button" class = "hide">
         <button type="button" class="btn btn-primary">Reset Quiz</button>
     </div>
-    <div id="save-button" class="hide">
-        <button type="button" class="btn btn-primary">Save Your Score</button>
+    <div id="save-button-group" class="hide">
+        <button type="button" class="btn btn-primary" id="save-button">Save Your Score</button>
+        <label for="name">Name:</label>
+        <input id = "input" type="text">
     </div>
 </div>
 </main>
